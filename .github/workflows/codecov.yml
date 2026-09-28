@@ -38,6 +38,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage.txt
+          flags: unittests
           fail_ci_if_error: false
           verbose: true
 
@@ -49,5 +50,6 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./junit.xml
           report_type: test_results
+          flags: unittests
           fail_ci_if_error: false
           verbose: true
