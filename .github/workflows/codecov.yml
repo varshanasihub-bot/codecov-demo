@@ -26,11 +26,14 @@ jobs:
 
       # 2. Run tests, generate both coverage.txt AND junit.xml
       - name: Run Tests with Coverage and JUnit output
+        id: run_tests
+        continue-on-error: true
         run: |
           gotestsum --junitfile junit.xml -- -race -coverprofile=coverage.txt -covermode=atomic ./...
 
       # 3. Upload Coverage (populates the Coverage tab)
       - name: Upload Coverage to Codecov
+        if: ${{ !cancelled() }}
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -38,7 +41,7 @@ jobs:
           fail_ci_if_error: false
           verbose: true
 
-      # 4. Upload Test Results (populates the Tests tab)
+      # 4. Upload Test Results (populates the Tests tab in your screenshot!)
       - name: Upload Test Results to Codecov
         if: ${{ !cancelled() }}
         uses: codecov/test-results-action@v1

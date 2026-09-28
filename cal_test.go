@@ -57,3 +57,27 @@ func TestDivByZero(t *testing.T) {
 		t.Errorf("expected error message %q, got %q", expectedMsg, err.Error())
 	}
 }
+
+// Failing test cases to demonstrate test failures and failure rate in Codecov:
+
+func TestAddFail(t *testing.T) {
+	result, err := Add(2, 2)
+	if err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
+	// Intentionally expecting 5 instead of 4 to cause a test failure
+	if result != 5 {
+		t.Errorf("FAIL INTENDED: expected 5, got %d", result)
+	}
+}
+
+func TestMulFail(t *testing.T) {
+	result, err := Mul(3, 3)
+	if err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
+	// Intentionally expecting 10 instead of 9 to cause a test failure
+	if result != 10 {
+		t.Errorf("FAIL INTENDED: expected 10, got %d", result)
+	}
+}
