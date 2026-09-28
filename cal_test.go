@@ -2,9 +2,11 @@ package cal
 
 import (
 	"testing"
+	"time"
 )
 
 func TestAdd(t *testing.T) {
+	time.Sleep(15 * time.Millisecond)
 	result, err := Add(2, 3)
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
@@ -15,6 +17,7 @@ func TestAdd(t *testing.T) {
 }
 
 func TestSub(t *testing.T) {
+	time.Sleep(20 * time.Millisecond)
 	result, err := Sub(5, 2)
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
@@ -25,6 +28,7 @@ func TestSub(t *testing.T) {
 }
 
 func TestMul(t *testing.T) {
+	time.Sleep(25 * time.Millisecond)
 	result, err := Mul(4, 3)
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
@@ -35,6 +39,7 @@ func TestMul(t *testing.T) {
 }
 
 func TestDiv(t *testing.T) {
+	time.Sleep(10 * time.Millisecond)
 	result, err := Div(10, 2)
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
@@ -45,6 +50,7 @@ func TestDiv(t *testing.T) {
 }
 
 func TestDivByZero(t *testing.T) {
+	time.Sleep(12 * time.Millisecond)
 	result, err := Div(10, 0)
 	if err == nil {
 		t.Fatal("expected an error for division by zero, got nil")
@@ -59,6 +65,7 @@ func TestDivByZero(t *testing.T) {
 }
 
 func TestNegativeNumbers(t *testing.T) {
+	time.Sleep(30 * time.Millisecond)
 	// Test Add with negative numbers
 	resAdd, err := Add(-5, -3)
 	if err != nil || resAdd != -8 {
@@ -87,6 +94,7 @@ func TestNegativeNumbers(t *testing.T) {
 // Failing test cases to demonstrate test failures and failure rate in Codecov:
 
 func TestAddFail(t *testing.T) {
+	time.Sleep(18 * time.Millisecond)
 	result, err := Add(2, 2)
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
@@ -98,6 +106,7 @@ func TestAddFail(t *testing.T) {
 }
 
 func TestMulFail(t *testing.T) {
+	time.Sleep(22 * time.Millisecond)
 	result, err := Mul(3, 3)
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
