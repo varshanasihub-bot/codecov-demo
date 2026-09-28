@@ -35,14 +35,25 @@ func TestMul(t *testing.T) {
 }
 
 func TestDiv(t *testing.T) {
-	// Tests valid division.
-	// Note: We deliberately omit division by zero test here so you can observe
-	// uncovered lines in Codecov! You can add it later to achieve 100% coverage.
 	result, err := Div(10, 2)
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
 	}
 	if result != 5 {
 		t.Errorf("expected 5, got %d", result)
+	}
+}
+
+func TestDivByZero(t *testing.T) {
+	result, err := Div(10, 0)
+	if err == nil {
+		t.Fatal("expected an error for division by zero, got nil")
+	}
+	if result != 0 {
+		t.Errorf("expected 0, got %d", result)
+	}
+	expectedMsg := "error: denominator cannot be zero"
+	if err.Error() != expectedMsg {
+		t.Errorf("expected error message %q, got %q", expectedMsg, err.Error())
 	}
 }
