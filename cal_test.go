@@ -58,6 +58,32 @@ func TestDivByZero(t *testing.T) {
 	}
 }
 
+func TestNegativeNumbers(t *testing.T) {
+	// Test Add with negative numbers
+	resAdd, err := Add(-5, -3)
+	if err != nil || resAdd != -8 {
+		t.Errorf("expected -8, got %d (err: %v)", resAdd, err)
+	}
+
+	// Test Sub with negative numbers
+	resSub, err := Sub(-5, -3)
+	if err != nil || resSub != -2 {
+		t.Errorf("expected -2, got %d (err: %v)", resSub, err)
+	}
+
+	// Test Mul with negative numbers
+	resMul, err := Mul(-5, 3)
+	if err != nil || resMul != -15 {
+		t.Errorf("expected -15, got %d (err: %v)", resMul, err)
+	}
+
+	// Test Div with negative numbers
+	resDiv, err := Div(-10, 2)
+	if err != nil || resDiv != -5 {
+		t.Errorf("expected -5, got %d (err: %v)", resDiv, err)
+	}
+}
+
 // Failing test cases to demonstrate test failures and failure rate in Codecov:
 
 func TestAddFail(t *testing.T) {
