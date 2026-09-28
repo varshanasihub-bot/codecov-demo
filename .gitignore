@@ -6,9 +6,10 @@
 *.dylib
 bin/
 
-# Test coverage files
+# Test coverage and report files
 coverage.txt
 coverage.html
+junit.xml
 *.out
 
 # OS specific files

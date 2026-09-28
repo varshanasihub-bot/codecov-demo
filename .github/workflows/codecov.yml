@@ -20,10 +20,16 @@ jobs:
           go-version: '1.23'
           cache: true
 
-      - name: Run Tests with Coverage
-        run: |
-          go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+      # 1. Install gotestsum (converts Go test output to JUnit XML)
+      - name: Install gotestsum
+        run: go install gotest.tools/gotestsum@latest
 
+      # 2. Run tests, generate both coverage.txt AND junit.xml
+      - name: Run Tests with Coverage and JUnit output
+        run: |
+          gotestsum --junitfile junit.xml -- -race -coverprofile=coverage.txt -covermode=atomic ./...
+
+      # 3. Upload Coverage (populates the Coverage tab)
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
@@ -31,3 +37,11 @@ jobs:
           files: ./coverage.txt
           fail_ci_if_error: false
           verbose: true
+
+      # 4. Upload Test Results (populates the Tests tab)
+      - name: Upload Test Results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./junit.xml
